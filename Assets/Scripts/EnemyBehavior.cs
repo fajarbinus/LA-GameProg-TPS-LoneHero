@@ -4,13 +4,58 @@ using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    void OnTriggerEnter (Collider other)
+
+    private GameBehavior _gameManager;
+
+    private int _enemyLives = 3;
+    public int EnemyLives
     {
-        if (other.name == "Player") Debug.Log ("Player Detected - Attack!!!");
+        get { return _enemyLives; }
+        set
+        {
+            _enemyLives = value;
+            if (_enemyLives <= 0)
+            {
+                Destroy(this.gameObject);
+                Debug.Log("EnemyDown!");
+            }
+        }
     }
 
-    void OnTriggerExit (Collider other)
+    void Start()
     {
-        if (other.name == "Player") Debug.Log ("Player out of Range - Resume Patrol!");
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameBehavior>();
+    }
+
+    void OnTriggerEnter (Collider other)
+    {
+        if (other.name == "Player")
+        {
+            Debug.Log("Player Detected - Attack!!!");
+            if (_gameManager != null)
+            {
+                _gameManager.HP -= 2;
+                Debug.Log("PlayerHP: "+_gameManager.HP);
+            }
+        }
+            
+            
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.name == "Bullet(Clone)")
+        {
+            EnemyLives -= 1;
+            Debug.Log("Critical hit! EnemyLives : " + _enemyLives);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.name == "Player")
+        {
+            Debug.Log("Player out of Range - Resume Patrol!");
+        } 
     }
 }
