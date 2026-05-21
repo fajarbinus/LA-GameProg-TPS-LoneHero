@@ -67,7 +67,7 @@ public class GameBehavior : MonoBehaviour
     public void RestartScene()
     {
         SceneManager.LoadScene(0);
-        Time.timeScale = 0f; //ini supaya gak freeze gameplaynyaaa
+        Time.timeScale = 1f; //ini supaya gak freeze gameplaynyaaa
     }
 
 
