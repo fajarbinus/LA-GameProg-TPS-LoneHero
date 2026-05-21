@@ -61,7 +61,7 @@ public class PlayerBehavior : MonoBehaviour
             Vector3 spawnPos = transform.position + transform.forward *1f;
             GameObject newBullet = Instantiate(Bullet, spawnPos, this.transform.rotation);
             Rigidbody bulletRB = newBullet.GetComponent<Rigidbody>();
-            bulletRB.velocity = transform.forward * BulletSpeed;
+            bulletRB.linearVelocity = transform.forward * BulletSpeed;
             _isShooting = false;
         }
             
