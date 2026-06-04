@@ -9,3 +9,10 @@ MonoImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 206385
+  packageName: BOKI - Low Poly Nature
+  packageVersion: 1.0
+  assetPath: Assets/Scripts/SimpleCameraController.cs
+  uploadId: 461542

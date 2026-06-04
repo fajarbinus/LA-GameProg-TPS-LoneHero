@@ -14,16 +14,14 @@ public class GameBehavior : MonoBehaviour
     public TMP_Text ItemText;
     public TMP_Text ProgressText;
     public Button WinButton;
+    public Button LossButton;
 
     void Start()
     {
         ItemText.text = "Items: " + _itemsCollected;
         HealthText.text = "Health " + _playerHP;
-
-        if (WinButton!=null)
-        {
-            WinButton.gameObject.SetActive(false);
-        }
+        if (WinButton!=null) WinButton.gameObject.SetActive(false);
+        if (LossButton!=null) LossButton.gameObject.SetActive(false);
     }
 
 
@@ -61,7 +59,23 @@ public class GameBehavior : MonoBehaviour
         {
             _playerHP = value;
             HealthText.text="Health "+ _playerHP;
+
+            if (_playerHP <= 0)
+            {
+                UpdateScene("You want another life with that?");
+                Time.timeScale = 0f; //pause
+                if (LossButton != null) LossButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                UpdateScene("Ouch, that's hurt!");
+            }
         }
+    }
+
+    public void UpdateScene(string updatedText)
+    {
+        ProgressText.text = updatedText;        
     }
 
     public void RestartScene()
